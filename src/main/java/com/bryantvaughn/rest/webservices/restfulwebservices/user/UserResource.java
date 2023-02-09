@@ -22,7 +22,12 @@ public class UserResource {
 
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable int id) {
-        return service.findOne(id);
+        User user = service.findOne(id);
+        if (user == null) {
+            throw new UserNotFoundException(String.format("id: %d does not exist", id));
+        }
+
+        return user;
     }
 
     @PostMapping(path = "/users", consumes = "application/json")

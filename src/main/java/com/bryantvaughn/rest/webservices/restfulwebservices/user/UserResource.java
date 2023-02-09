@@ -1,5 +1,6 @@
 package com.bryantvaughn.rest.webservices.restfulwebservices.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -39,5 +40,11 @@ public class UserResource {
                 .buildAndExpand(newUser.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping("/users/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUserById(@PathVariable int id) {
+        service.deleteOne(id);
     }
 }

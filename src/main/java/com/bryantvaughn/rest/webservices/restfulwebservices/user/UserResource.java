@@ -1,5 +1,6 @@
 package com.bryantvaughn.rest.webservices.restfulwebservices.user;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class UserResource {
     }
 
     @PostMapping(path = "/users", consumes = "application/json")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         User newUser = service.save(user);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
